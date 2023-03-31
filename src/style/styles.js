@@ -1,4 +1,5 @@
 import {
+    Platform,
     StyleSheet
 } from 'react-native';
 
@@ -6,13 +7,20 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#000',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        paddingTop: Platform.OS === 'ios' ? 25 : 0
+    },
+    containerLogin: {
+        flex: 1,
+        backgroundColor: '#000000',
+        paddingLeft: 25,
+        paddingRight: 25,
     },
     header: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 20
+        padding: 20,
     },
     txtWhite: {
         fontSize: 20,
@@ -84,6 +92,66 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
         justifyContent: 'center',
+    },
+    titleCalendar: {
+        textTransform: 'uppercase',
+        fontSize: 15,
+        fontWeight: '700'
+    },
+    descCalendar: {
+        fontSize: 15
+    },
+    txtDateCalendar: {
+        color: '#505050'
+    },
+    txtLogin: {
+        color: '#fff',
+        fontSize: 30,
+        fontWeight: '700',
+        marginTop: '15%',
+        marginBottom: '50%'
+    },
+    txtCadastro: {
+        color: '#fff',
+        fontSize: 30,
+        fontWeight: '700',
+        marginTop: '15%',
+        marginBottom: '40%'
+    },
+    inputSignInUp: {
+        backgroundColor: '#1D1D1D',
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#979797',
+        color: '#fff',
+        borderRadius: 10,
+        marginTop: 10,
+        marginBottom: 25,
+        height: 50
+    },
+    btnSignInUp: {
+        backgroundColor: '#8687E7',
+        padding: 15,
+        alignItems: 'center'
+    },
+    txtNameProfile: {
+        color: 'white',
+        fontSize: 17,
+        marginTop: 20,
+        fontFamily: 'Lato_400Regular',
+    },
+    optionsProfile: {
+        alignItems: "center",
+        display: 'flex',
+        flexDirection: "row",
+        marginTop: 15,
+        marginBottom: 15,
+        justifyContent: 'space-between'
+    },
+    txtOptionsProfile:{
+        marginLeft: 20,
+        fontSize: 15,
+        color: 'white'
     }
 
 });

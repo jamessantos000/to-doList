@@ -1,20 +1,41 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FlatList, View, TouchableOpacity, Text } from 'react-native';
 import styles from '../src/style/styles';
-import { Ionicons, Feather, AntDesign } from '@expo/vector-icons';
+import { Feather, AntDesign } from '@expo/vector-icons';
+import { TaskContext } from '../functions/context';
 
+import HandleCheckBox from '../functions/donePendingTask'
+import DelTask from '../functions/deleteTask';
 
 export default function TaskList(props) {
-  const { data, handleCheckboxChange, deleteTask } = props;
+  const { valueTask, orderBy } = useContext(TaskContext)
+  const handleCheckboxChange = HandleCheckBox();
+  const deleteTask = DelTask();
+
+  const tasksWithIndex = valueTask.map((task, index) => {
+    return {
+      ...task,
+      originalIndex: index,
+    };
+  });
 
   return (
     <FlatList
-      data={data}
-      keyExtractor={item => item.toString()}
+      data={tasksWithIndex
+        .filter(task => !task[3])
+        .sort((a, b) => {
+          if(orderBy === true){
+            return b.originalIndex + a.originalIndex
+          }else{
+            return b.originalIndex - a.originalIndex
+          }
+        })
+      }
+      keyExtractor={task => task.originalIndex.toString()}
       renderItem={({item, index}) => (
         <View style={{flex: 1, marginStart: 20, marginEnd: 20, marginBottom: 15}}>
           <View style={styles.taskUnd}>
-            <TouchableOpacity onPress={() => handleCheckboxChange(index)} style={{marginEnd: 15}}>
+            <TouchableOpacity onPress={() => handleCheckboxChange(item.originalIndex)} style={{marginEnd: 15}}>
               <View style={[styles.checkboxContainer, item[3] && styles.checked]}>
                 {item[3] && <Text style={styles.checkmark}>✓</Text>}
               </View>
